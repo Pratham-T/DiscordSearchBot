@@ -6,7 +6,7 @@ A server owner's dream!
 This is a bot to :mag_right: other bots available on Discord directly from Discord.:robot:<br>
 It scouts:cop: all your channels for suspicious links and spammers as well!:heavy_check_mark:
 
-Made with :heart: for Speranza'21 Campus Hack Hackathon::zap:zap:
+Made with :heart: for Speranza'21 Campus Hack Hackathon::zap::zap:
 
 ## Requirements to run the program
 
