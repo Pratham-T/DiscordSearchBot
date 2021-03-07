@@ -1,0 +1,8 @@
+We found the following sources quite useful:
+
+https://www.geeksforgeeks.org/python-os-getenv-method/
+https://stackoverflow.com/questions/56121561/pythons-json-attributeerror-str-object-has-no-attribute-keys
+https://www.virustotal.com/gui/url/2fa90eafc7b511b142a720c15f0d10999bb63bfd5f53bbd6924f57147ecdc12b
+https://repl.it/
+https://virustotal.github.io/vt-py/quickstart.html
+https://discordpy.readthedocs.io/en/latest/api.html
