@@ -1,4 +1,5 @@
 from logging import error
+import discord
 from discord.ext import commands
 import random
 from bs4 import BeautifulSoup
@@ -24,7 +25,7 @@ images = [
 'https://i.imgur.com/42IdSrp.jpg',
 'https://i.imgur.com/YYHB9Vm.jpg']
 
-client = commands.Bot(command_prefix="-")
+client = commands.Bot(command_prefix="-", help_command=None)
 
 url = "https://top.gg"
 
@@ -68,7 +69,7 @@ async def on_ready():
 
 @client.command()
 async def hello(ctx):
-    await ctx.send("hi")
+    await ctx.send("Hi")
 
 @client.command(aliases=['user','info'])
 @commands.has_permissions(kick_members=True)
@@ -86,7 +87,6 @@ async def meme(ctx):
     embed.set_image(url = random_link)
     await ctx.send(embed=embed)
 
-    msg = message.content
     
 @client.command()
 async def search(ctx, *, msg):
@@ -110,6 +110,37 @@ async def top(ctx):
     for embed in embeds:
         await ctx.channel.send(embed = embed)
     await ctx.channel.send("**End of Results**")
+
+@client.command()
+async def help(ctx):
+    if ctx.author == client.user:
+        return
+    helps = [
+        {
+            "command": "-help",
+            "description": "Shows help on how to use the bot."
+        },
+        {
+            "command": "-search [Search Query (Mandatory)]",
+            "description": "Searches [Search Query] for matching bots on https://top.gg/"
+        },
+        {
+            "command": "-top",
+            "description": "Shows top trending bots on https://top.gg/"
+        },
+        {
+            "command": "-meme",
+            "description": "Shows a random meme."
+        }
+    ]
+
+    embed = discord.Embed()
+    embed.title = "Bot Commands Help"
+    for help in helps:
+        embed.add_field(name="Command", value=help["command"], inline=True)
+        embed.add_field(name="Description", value=help["description"], inline=True)
+        embed.add_field(name="-----------------------------------------", value="----------------------------------------\n", inline=False)
+    await ctx.send(embed=embed)
         
 
 
