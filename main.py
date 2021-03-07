@@ -69,6 +69,8 @@ async def on_ready():
 
 @client.command()
 async def hello(ctx):
+    if ctx.author == client.user:
+        return
     await ctx.send("Hi")
 
 @client.command(aliases=['user','info'])
@@ -82,6 +84,8 @@ async def whois(ctx,member:discord.Member):
 
 @client.command()
 async def meme(ctx):
+    if ctx.author == client.user:
+        return
     embed = discord.Embed(color = discord.Colour.green())
     random_link = random.choice(images)
     embed.set_image(url = random_link)
@@ -135,6 +139,10 @@ async def help(ctx):
             "description": "Shows top trending bots on https://top.gg/"
         },
         {
+            "command": "-tags",
+            "description": "Shows all available tags(categories) of bots"
+        },
+        {
             "command": "-meme",
             "description": "Shows a random meme."
         }
@@ -148,6 +156,25 @@ async def help(ctx):
         embed.add_field(name="-----------------------------------------", value="----------------------------------------\n", inline=False)
     await ctx.send(embed=embed)
         
-
+@client.command()
+async def tags(ctx):
+    if ctx.author == client.user:
+        return
+    searchQuery = "/tags"
+    resultsPage = BeautifulSoup(requests.get(url + searchQuery).text, 'html.parser')
+    resultWrapper = resultsPage.find_all("div",{"class":"maincon"})
+    results = resultWrapper[1].find_all("a")
+    
+    name = ""
+    embed = discord.Embed()
+    embed.title = "All Currently Available Tags"
+    for result in results:
+        tagName = result.text.strip()
+        tagLink = url + result.get("href")
+        name = name + " [{}]({})\n ".format(tagName,tagLink)
+        #embed.add_field(name=name, value="[{}]({})".format(tagName, tagLink), inline=False)
+    embed.description = name
+    embed.set_footer(text="Click any tag to go to its page for all results. You can also search here using the search command!")
+    await ctx.channel.send(embed=embed)
 
 client.run(os.getenv('TOKEN'))
