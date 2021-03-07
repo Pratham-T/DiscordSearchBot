@@ -99,7 +99,10 @@ async def search(ctx, *, msg):
         
     for embed in embeds:
         await ctx.channel.send(embed=embed)
-    await ctx.channel.send("**End of Results**")
+    embed2 = discord.Embed()
+    embed2.title = "**End of Results**"
+    embed2.add_field(name="More Results: ", value=url + searchQuery)
+    await ctx.channel.send(embed=embed2)
 
 @client.command()
 async def top(ctx):
@@ -109,7 +112,10 @@ async def top(ctx):
     embeds = getEmbed(searchQuery)
     for embed in embeds:
         await ctx.channel.send(embed = embed)
-    await ctx.channel.send("**End of Results**")
+    embed2 = discord.Embed()
+    embed2.title = "**End of Results**"
+    embed2.add_field(name="More Results: ", value=url + searchQuery)
+    await ctx.channel.send(embed=embed2)
 
 @client.command()
 async def help(ctx):
