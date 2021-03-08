@@ -187,7 +187,7 @@ async def on_message(message):
         #     report=report+str(key)+':'+str(array[key])+'\n'
         # await message.channel.send(report)
         # need a dm system here
-        if (array["malicious"] >= 1 or array["suspicious"] >= 1):
+        if (array["malicious"] >= 2 or array["suspicious"] >= 4):
             await message.channel.send("One or more Malicious URLs detected!!")
         else:
             await message.channel.send("Fine!")
